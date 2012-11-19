@@ -21,18 +21,44 @@
 	<!-- guide import -->
 	<link rel="stylesheet" href="./mrte_core/css/egovframework/mbl/rte/guide/guide.css">
 	<script type="text/javascript"  src="./mrte_core/js/egovframework/mbl/rte/guide/guide.js"></script>
+	<script type="text/javascript"  src="./js/lofunc.js"></script>
 
+	<script type="text/javaScript" language="javascript" defer="defer">
+		$('#intro').live('pageshow', init);
+	</script>
 </head>
 <body>
-	<!-- 모바일 페이지 start -->
+	<!-- 인트로 페이지 start -->
 	<div id="intro" data-role="page" class="type-index" >
 		
 		<div data-role="content"  align="center">
-			<a href="main.html"><img src="./img/intrro.jpg" /></a>
-			<a href="main.html"><img src="./img/intrro.jpg" /></a>
-			<p>aaaa</p>
+			<a href="#main"><img src="./img/intrro.jpg" /></a>
 		</div>
 	</div>
+	<!-- 인트로 페이지 end -->
+	
+	<!-- 메인 페이지 start -->
+	<div id="main" data-role="page" class="type-index" >
+		<!-- header start -->
+		<div data-role="header" data-position="inline" data-theme="z"  class="egovBarHeader">
+			
+			<h1>할매 어디가요?</h1>
+		</div> 
+		<!-- header end -->
+		
+		<div data-role="content" data-theme="d">
+			<p  style="text-align: center; clear: none; float: none;"><img src="./img/home_chart.jpg" ></p>
+			<a href="noti.html" data-role="button" data-theme="b">위치알람</a>
+			<a href="check.html" data-role="button" data-theme="b">자가진단</a>
+			<a href="org_list.html" data-role="button" data-theme="b">기관정보</a>
+		</div>
+		
+		<div data-role="footer" data-theme="z"  class="egovBar">
+			<h4>Copyright(c)2012 Mozips.</h4>
+		</div>
+		
+	</div>	
+	<!-- 메인 페이지 end -->	
 </body>
 </html>
 
