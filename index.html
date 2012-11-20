@@ -24,17 +24,17 @@
 	<script type="text/javascript"  src="./js/lofunc.js"></script>
 
 	<script type="text/javaScript" language="javascript" defer="defer">
-		$('#intro').live('pageshow', init);
+		//$('#intro').live('pageshow', init);
 	</script>
 </head>
 <body>
 	<!-- 인트로 페이지 start -->
-	<div id="intro" data-role="page" class="type-index" >
+	<!-- div id="intro" data-role="page" class="type-index" >
 		
 		<div data-role="content"  align="center">
 			<a href="#main"><img src="./img/intrro.jpg" /></a>
 		</div>
-	</div>
+	</div -->
 	<!-- 인트로 페이지 end -->
 	
 	<!-- 메인 페이지 start -->
@@ -47,10 +47,10 @@
 		<!-- header end -->
 		
 		<div data-role="content" data-theme="d">
-			<p  style="text-align: center; clear: none; float: none;"><img src="./img/home_chart.jpg" ></p>
-			<a href="noti.html" data-role="button" data-theme="b">위치알람</a>
-			<a href="check.html" data-role="button" data-theme="b">자가진단</a>
-			<a href="org_list.html" data-role="button" data-theme="b">기관정보</a>
+			<p style="text-align: center; clear: none; float: none;"><img src="./img/home_chart2.jpg" ></p>
+			<a id="btnNoti" href="noti.html" data-role="button" data-theme="b">위치알람</a>
+			<a id="btnCheck" href="check.html" data-role="button" data-theme="b">자가진단</a>
+			<a id="btnOrg" href="#" data-role="button" data-theme="b">기관정보</a>
 		</div>
 		
 		<div data-role="footer" data-theme="z"  class="egovBar">
@@ -59,6 +59,88 @@
 		
 	</div>	
 	<!-- 메인 페이지 end -->	
+	
+	<!-- 기관정보목록 페이지 start -->
+	<div id="org_list" data-role="page" class="type-index" >
+		<div data-role="header" data-theme="b" class="egovBarHeader">
+		    <a id="aHomeOrgList" data-icon="home" class="ui-btn-left"  data-ajax="false">홈</a>
+            <a href="#"         data-icon="back" class="ui-btn-right" data-ajax="false" data-rel="back"  >이전</a>
+			<h1>기관정보</h1>	
+		</div>  
+		
+		<div data-role="content"  >
+			<div data-role="navbar">
+				<ul>
+					<li><a id="liLoc"  class="ui-btn-active egov-btn-corner-tl">지역</a></li>
+					<li><a id="liPay" >비용</a></li>
+					<li><a id="liTyp" >시설</a></li>
+					<li><a id="liLang" class="egov-btn-corner-tr">가나다</a></li>
+				</ul>
+			</div>
+			<div id="typ_list">
+				<!--ul data-role="listview" data-inset="true" data-theme="d">
+					<li data-role="list-divider">서울</li>
+					<li><a href="#org_detail">(재)다솜이재단 다솜누리단기보호센터</a></li>
+				</ul-->		
+			</div>	
+		</div>
+	</div>
+	<!-- 기관정보목록 페이지 end -->	
+
+	<!-- 기관정보상세 페이지 start -->
+	<div id="org_detail" data-role="page" class="type-index" data-theme="d"  >
+		<div data-role="header"   data-position="inline" data-theme="z"  class="egovBahttp://localhost:8080/WGM/#rHeader">
+		    <a id="aHomeOrgDetail"  data-icon="home" class="ui-btn-left"  data-ajax="false">홈</a>
+            <a id="aListOrgDetail" data-icon="back" class="ui-btn-right" data-ajax="false" data-rel="back"  >목록</a>
+			<h1>기관정보</h1>	
+		</div>  
+		
+		<div data-role="content" >
+			<h2 id="d_org_nm">org_nm</h2>
+			<ul data-role="listview">
+				<li>
+					<table>
+						<tr>
+							<td  colspan="2" align="center">
+								<img src="./img/org_img.jpg" width="100%"/>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding: 5px" width="100" align="right">소재지:</td>
+							<td>경기 고양시 덕양구 행신동 772-1</td>
+						</tr>
+						<tr>
+							<td style="padding: 5px" align="right">연락처:</td>
+							<td>전화번호 : 031-979-9362, 팩스 : 031-979-9364</td>
+						</tr>
+						<tr>
+							<td style="padding: 5px" align="right">홈페이지:</td>
+							<td><a href="http://www.gysilver.or.kr">http://www.gysilver.or.kr</a></td>
+						</tr>
+						<tr>
+							<td style="padding: 5px" align="right">비용:</td>
+							<td>1달 50만원</td>
+						</tr>
+						<tr>
+							<td style="padding: 5px" align="right">지원내용:</td>
+							<td>초로기치매 미지원, 월 3만원 국가지원금 공제..</td>
+						</tr>
+						<tr>
+							<td style="padding: 5px" align="right">시설구성:</td>
+							<td>2층: 사무실, 프로그램실, 주방, 화장실, 소그룹실,실내조경 1층: 경로당 지층: 프로그램실, 간호사실, 재활운동실, 발맛사지공원, 화장실</td>
+						</tr>
+						<tr>
+							<td style="padding: 5px" align="right">입소정원:</td>
+							<td>42명 (2011년 3월 현재 24명)</td>
+						</tr>
+					</table>
+				</li>
+			</ul>
+			<br>
+			<a href="tel:010-9154-2621" data-icon="" data-role="button">통화</a>
+		</div>
+		
+	<!-- 기관정보상세 페이지 end -->
 </body>
 </html>
 

@@ -4,30 +4,56 @@ var totcnt;
 var imgNum;
 var resultList;
 
+
+
 function init() {
 	moveMain = setInterval('goMain()', 1000);
 }
 function goMain() {
 	$.mobile.changePage("#main" ) ;
-	clearInterval(moveMain);
+	//clearInterval(moveMain);
 }
 
 $(function(){
-	$ ("#li_loc").bind( "tap" , function(event){
+	
+	//메인화면 버튼 이벤트
+	$ ("#btnNoti").bind( "tap" , function(event){
+		$.mobile.changePage("#org_list" ) ;
+	});	
+	$ ("#btnCheck").bind( "tap" , function(event){
+		$.mobile.changePage("#org_list" ) ;
+	});	
+	$ ("#btnOrg").bind( "tap" , function(event){
 		getTypeList("LOC");	
-	});
+		$.mobile.changePage("#org_list" ) ;
+	});	
 	
-	$ ("#li_pay").bind( "tap" , function(event){
+	//기관목록 버튼 이벤트
+	$ ("#liLoc").bind( "tap" , function(event){
+		getTypeList("LOC");	
+	});	
+	$ ("#liPay").bind( "tap" , function(event){
 		getTypeList("PAY");
-	});
-	
-	$ ("#li_typ").bind( "tap" , function(event){
+	});	
+	$ ("#liTyp").bind( "tap" , function(event){
 		getTypeList("TYP");
-	});
-	
-	$ ("#li_lang").bind( "tap" , function(event){
+	});	
+	$ ("#liLang").bind( "tap" , function(event){
 		getTypeList("LANG");
 	});
+	
+	//홈버튼 이벤트
+	$ ("#aHomeOrgList").bind( "tap" , function(event){
+		goMain()
+	});	
+	$ ("#aHomeOrgDetail").bind( "tap" , function(event){
+		goMain()
+	});	
+	$ ("#aListOrgDetail").bind( "tap" , function(event){
+		$.mobile.changePage("#org_list" ) ;
+	});	
+	
+	
 });
 
 
