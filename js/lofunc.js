@@ -4,10 +4,15 @@ var totcnt;
 var imgNum;
 var resultList;
 
+var score=0;
+var question=['질문1','','',''];
+
 function goMain() {
 	$.mobile.changePage("#main") ;  //, "pop", false,false
 }
-
+function tapZero(){
+	
+}
 $(function(){
 	
 	//메인화면 버튼 이벤트
@@ -15,13 +20,16 @@ $(function(){
 		$.mobile.changePage("#org_list" ) ;
 	});	
 	$ ("#btnCheck").bind( "tap" , function(event){
-		$.mobile.changePage("#org_list" ) ;
+		$.mobile.changePage("#check" ) ;
 	});	
 	$ ("#btnOrg").bind( "tap" , function(event){
 		getTypeList("LOC");	
 		$.mobile.changePage("#org_list" ) ;
 	});	
-	
+	$ ("#aHomeOrgCheck").bind( "tap" , function(event){
+		$.mobile.changePage("index.html" ) ;
+	});	
+
 	//기관목록 버튼 이벤트
 	$ ("#liLoc").bind( "tap" , function(event){
 		getTypeList("LOC");	
@@ -50,6 +58,31 @@ $(function(){
 		$.mobile.changePage("#org_list" ) ;
 	});	
 
+	//번호 클릭 이벤트
+	
+	$ ("#TabZero").bind( "tap" , function(event){
+		tapZero();
+		nextRead();
+	});	
+	$ ("#TabOne").bind( "tap" , function(event){
+		tapOne();
+		readNext();
+	});	
+	$ ("#TabTow").bind( "tap" , function(event){
+		tapTow();
+		readNext();
+	});	
+	$ ("#TabNine").bind( "tap" , function(event){
+		tapNine();
+		readNext();
+	});
+	
+	//테스트 화면이동
+	$ ("#toTest").bind( "tap" , function(event){
+		alert("sdjdj");
+		$.mobile.changePage("#test" ) ;
+	});	
+	
 });
 
 
