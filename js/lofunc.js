@@ -5,8 +5,8 @@ var imgNum;
 var resultList;
 
 var score=0;
-var question=['질문1','','',''];
-
+var question=['질문1','질문2','질문3','질문4'];
+var idxStatus = 0;
 function goMain() {
 	$.mobile.changePage("#main") ;  //, "pop", false,false
 }
@@ -80,11 +80,24 @@ $(function(){
 	//테스트 화면이동
 	$ ("#toTest").bind( "tap" , function(event){
 		alert("sdjdj");
+		idxStatus= 0;
+		score=0;
 		$.mobile.changePage("#test" ) ;
+		readNext();
 	});	
 	
 });
 
+function tapZero(){
+	
+	
+}
+
+function readNext(){
+	idxStatus++;
+	var ques = question[idxStatus];
+	$('#checkContents').html("<h3>"+ques+"</h3>");
+}
 
 function getTypeList(type){
 	
