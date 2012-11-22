@@ -45,14 +45,16 @@ $(function(){
 	});
 	
 	//홈버튼 이벤트
+/*
 	$ ("#aHomeOrgList").bind( "tap" , function(event){
-		goMain()
+		goMain();
 	});	
+*/	
 	$ ("#aHomeOrgDetail").bind( "tap" , function(event){
-		goMain()
+		goMain();
 	});	
 	$ ("#aHomeOrgDetailF").bind( "tap" , function(event){
-		goMain()
+		goMain();
 	});	
 	$ ("#aListOrgDetail").bind( "tap" , function(event){
 		$.mobile.changePage("#org_list" ) ;
@@ -100,22 +102,67 @@ function readNext(){
 }
 
 function getTypeList(type){
-	
+/*	
 	var jqxhr = $.ajax( "http://14.63.226.13/server/org_list.jsp?type="+type )
     .done(function() { alert("success"); })
     .fail(function() { alert("error"); })
     .always(function() { alert("complete"); });
-	
+*/	
+    $.ajax({
+        type: "GET",
+        url: "http://14.63.226.13/server/org_list.jsp?type="+type,
+        dataType: "jsonp",
+        crossDomain: true,
+        jsonp: "callback",
+        timeout: 2000,
+        error: function(jqXHR, textStatus, errorThrown) {   
+            //alert('Error Message: '+textStatus);
+            //alert('HTTP Error: '+errorThrown);
+			var list_html_err = "<ul data-role=\"listview\" data-inset=\"true\" class=\"ui-listview ui-listview-inset ui-corner-all ui-shadow\" >" +
+			                    "<li align=\"center\">서버로부터 목록을 가져오지 못했습니다.</li>" +
+			                    "</ul>";
+  
+			$('#typ_list').html(list_html_err);  
+        },
+        success: function (json) {
+        	var list_html = "";
+    		var detail_html = "";
+
+    		resultList = json.resultList;
+    		totcnt = json.resultList.length;
+    		var grpValue = "";
+			var idxChk =0;
+			for (var i = 0; i < totcnt; i++) {
+				
+				var result = resultList[i];
+				if(grpValue == "" || grpValue != result.grp_value ){
+					if(idxChk==0){
+						list_html += "<li data-role=\"list-divider\"  role=\"heading\" class=\"ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined\" >"+result.grp_value+"</li>";
+					}
+					else{
+						list_html += "<li data-role=\"list-divider\"  role=\"heading\" class=\"ui-li ui-li-divider ui-btn ui-bar-b ui-btn-up-undefined\" >"+result.grp_value+"</li>";
+					}
+					idxChk++;
+				}
+				list_html += "<li class=\"ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d\">" +
+							 "<div class=\"ui-btn-inner ui-li\"><div class=\"ui-btn-text\">" +
+				             "<a href=\"javascript\:getTypeDetail('" + i + "')\"  class=\"ui-link-inherit\">"+ result.org_nm +"</a>" +
+				             "</div><span class=\"ui-icon ui-icon-arrow-r ui-icon-shadow\"></span></div></li>"
+				             ;
+			}
+			list_html = "<ul data-role=\"listview\" data-inset=\"true\" class=\"ui-listview ui-listview-inset ui-corner-all ui-shadow\" >" +
+						list_html +
+						"</ul>";
+			$('#typ_list').html(list_html);    		
+        }
+    });
+/*	
 	$.getJSON("http://14.63.226.13/server/org_list.jsp?type="+type, "callback=?", function(json) {
 		var list_html = "";
 		var detail_html = "";
 
 		resultList = json.resultList;
-		/* 인터넷 오류처리 방법 확인하여 처리필요함
-		if(!resultList){
-			$('#type_list').html("<li>인터넷 연결이 되지 않아 목록을 가져오지 못했습니다.</li>");
-		}
-		*/
+
 		totcnt = json.resultList.length;
 		
 		if(totcnt ==0){
@@ -149,6 +196,7 @@ function getTypeList(type){
 		}
 		
 	});
+*/
 
 }
 
