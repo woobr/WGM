@@ -55,6 +55,11 @@ $(function(){
 
 function getTypeList(type){
 	
+	var jqxhr = $.ajax( "http://14.63.226.13/server/org_list.jsp?type="+type )
+    .done(function() { alert("success"); })
+    .fail(function() { alert("error"); })
+    .always(function() { alert("complete"); });
+	
 	$.getJSON("http://14.63.226.13/server/org_list.jsp?type="+type, "callback=?", function(json) {
 		var list_html = "";
 		var detail_html = "";
@@ -88,8 +93,8 @@ function getTypeList(type){
 				list_html += "<li class=\"ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d\">" +
 							 "<div class=\"ui-btn-inner ui-li\"><div class=\"ui-btn-text\">" +
 				             "<a href=\"javascript\:getTypeDetail('" + i + "')\"  class=\"ui-link-inherit\">"+ result.org_nm +"</a>" +
-				             "</div><span class=\"ui-icon ui-icon-arrow-r ui-icon-shadow\"></span></div></li>";
-							
+				             "</div><span class=\"ui-icon ui-icon-arrow-r ui-icon-shadow\"></span></div></li>"
+				             ;
 			}
 			list_html = "<ul data-role=\"listview\" data-inset=\"true\" class=\"ui-listview ui-listview-inset ui-corner-all ui-shadow\" >" +
 						list_html +
