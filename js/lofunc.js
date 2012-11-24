@@ -1,33 +1,29 @@
 
-var moveMain ;
-var totcnt;
-var imgNum;
-var resultList;
+var totcntLoc;
+var resultListLoc;
+var totcntPay;
+var resultListPay;
+var totcntTyp;
+var resultListTyp;
+var totcntLang;
+var resultListLang;
 
-var score=0;
-var question=['질문1','질문2','질문3','질문4'];
-var idxStatus = 0;
 function goMain() {
 	$.mobile.changePage("#main") ;  //, "pop", false,false
 }
-function tapZero(){
-	
-}
+
 $(function(){
 	
 	//메인화면 버튼 이벤트
 	$ ("#btnNoti").bind( "tap" , function(event){
-		$.mobile.changePage("#org_list" ) ;
-	});	
-	$ ("#btnCheck").bind( "tap" , function(event){
-		$.mobile.changePage("#check" ) ;
-	});	
+		$.mobile.changePage("#noti" ) ;
+	});		
 	$ ("#btnOrg").bind( "tap" , function(event){
 		getTypeList("LOC");	
 		$.mobile.changePage("#org_list" ) ;
 	});	
 	$ ("#aHomeOrgCheck").bind( "tap" , function(event){
-		$.mobile.changePage("index.html" ) ;
+		$.mobile.changePage("#main" ) ;
 	});	
 
 	//기관목록 버튼 이벤트
@@ -45,69 +41,72 @@ $(function(){
 	});
 	
 	//홈버튼 이벤트
-/*
-	$ ("#aHomeOrgList").bind( "tap" , function(event){
-		goMain();
-	});	
-*/	
 	$ ("#aHomeOrgDetail").bind( "tap" , function(event){
 		goMain();
-	});	
-	$ ("#aHomeOrgDetailF").bind( "tap" , function(event){
-		goMain();
-	});	
-	$ ("#aListOrgDetail").bind( "tap" , function(event){
-		$.mobile.changePage("#org_list" ) ;
-	});	
-
-	//번호 클릭 이벤트
-	
-	$ ("#TabZero").bind( "tap" , function(event){
-		tapZero();
-		nextRead();
-	});	
-	$ ("#TabOne").bind( "tap" , function(event){
-		tapOne();
-		readNext();
-	});	
-	$ ("#TabTow").bind( "tap" , function(event){
-		tapTow();
-		readNext();
-	});	
-	$ ("#TabNine").bind( "tap" , function(event){
-		tapNine();
-		readNext();
-	});
-	
-	//테스트 화면이동
-	$ ("#toTest").bind( "tap" , function(event){
-		alert("sdjdj");
-		idxStatus= 0;
-		score=0;
-		$.mobile.changePage("#test" ) ;
-		readNext();
-	});	
+	});		
 	
 });
 
-function tapZero(){
+function setOrgList(list, count, type){
 	
+	var list_html = "";
+	var grpValue = "";
+	var idxChk =0;
 	
-}
-
-function readNext(){
-	idxStatus++;
-	var ques = question[idxStatus];
-	$('#checkContents').html("<h3>"+ques+"</h3>");
+	for (var i = 0; i < count; i++) {
+		
+		var result = list[i];
+		if(grpValue == "" || grpValue != result.grp_value ){
+			if(idxChk==0){
+				list_html += "<li data-role=\"list-divider\"  role=\"heading\" class=\"ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined\" >"+result.grp_value+"</li>";
+			}
+			else{
+				list_html += "<li data-role=\"list-divider\"  role=\"heading\" class=\"ui-li ui-li-divider ui-btn ui-bar-b ui-btn-up-undefined\" >"+result.grp_value+"</li>";
+			}
+			idxChk++;
+		}
+		list_html += "<li class=\"ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d\">" +
+					 "<div class=\"ui-btn-inner ui-li\"><div class=\"ui-btn-text\">" +
+		             "<a href=\"javascript\:getTypeDetail('" + i + "','" + type + "')\"  class=\"ui-link-inherit\">"+ result.org_nm +"</a>" +
+		             "</div><span class=\"ui-icon ui-icon-arrow-r ui-icon-shadow\"></span></div></li>"
+		             ;
+	}
+	list_html = "<ul data-role=\"listview\" data-inset=\"true\" class=\"ui-listview ui-listview-inset ui-corner-all ui-shadow\" >" +
+				list_html +
+				"</ul>";
+	$('#typ_list').html(list_html);    	
 }
 
 function getTypeList(type){
-/*	
-	var jqxhr = $.ajax( "http://14.63.226.13/server/org_list.jsp?type="+type )
-    .done(function() { alert("success"); })
-    .fail(function() { alert("error"); })
-    .always(function() { alert("complete"); });
-*/	
+	//받아온 데이터가 있을경우 해당 데이터를 재사용하고 리턴
+	switch(type){
+		case "LOC": 
+			if(resultListLoc !=null){
+				setOrgList(resultListLoc, totcntLoc,type);
+				return;
+			}
+		break;
+		case "PAY": 
+			if(resultListPay !=null){
+				setOrgList(resultListPay, totcntPay,type);
+				return;
+			}		
+		break;
+		case "TYP": 
+			if(resultListTyp !=null){
+				setOrgList(resultListTyp, totcntTyp,type);
+				return;
+			}
+		break;
+		case "LANG": 
+			if(resultListLang !=null){
+				setOrgList(resultListLang, totcntLang,type);
+				return;
+			}
+		break;
+		
+	}
+	
     $.ajax({
         type: "GET",
         url: "http://14.63.226.13/server/org_list.jsp?type="+type,
@@ -125,93 +124,84 @@ function getTypeList(type){
 			$('#typ_list').html(list_html_err);  
         },
         success: function (json) {
-        	var list_html = "";
-    		var detail_html = "";
-
-    		resultList = json.resultList;
-    		totcnt = json.resultList.length;
-    		var grpValue = "";
-			var idxChk =0;
-			for (var i = 0; i < totcnt; i++) {
-				
-				var result = resultList[i];
-				if(grpValue == "" || grpValue != result.grp_value ){
-					if(idxChk==0){
-						list_html += "<li data-role=\"list-divider\"  role=\"heading\" class=\"ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined\" >"+result.grp_value+"</li>";
-					}
-					else{
-						list_html += "<li data-role=\"list-divider\"  role=\"heading\" class=\"ui-li ui-li-divider ui-btn ui-bar-b ui-btn-up-undefined\" >"+result.grp_value+"</li>";
-					}
-					idxChk++;
-				}
-				list_html += "<li class=\"ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d\">" +
-							 "<div class=\"ui-btn-inner ui-li\"><div class=\"ui-btn-text\">" +
-				             "<a href=\"javascript\:getTypeDetail('" + i + "')\"  class=\"ui-link-inherit\">"+ result.org_nm +"</a>" +
-				             "</div><span class=\"ui-icon ui-icon-arrow-r ui-icon-shadow\"></span></div></li>"
-				             ;
-			}
-			list_html = "<ul data-role=\"listview\" data-inset=\"true\" class=\"ui-listview ui-listview-inset ui-corner-all ui-shadow\" >" +
-						list_html +
-						"</ul>";
-			$('#typ_list').html(list_html);    		
+        	//ajax로부터 읽어온 데이터를 세팅함
+        	switch(type){
+    		case "LOC": 
+    			resultListLoc = json.resultList;
+    			totcntLoc =  json.resultList.length;
+    			setOrgList(resultListLoc, totcntLoc,type);
+    		break;
+    		case "PAY": 
+    			resultListPay = json.resultList;
+    			totcntPay =  json.resultList.length;
+    			setOrgList(resultListPay, totcntPay,type);
+    		break;
+    		case "TYP": 
+    			resultListTyp = json.resultList;
+    			totcntTyp =  json.resultList.length;
+    			setOrgList(resultListTyp, totcntTyp,type);
+    		break;
+    		case "LANG": 
+    			resultListLang = json.resultList;
+    			totcntLang =  json.resultList.length;
+    			setOrgList(resultListLang, totcntLang,type);
+    		break;
+    		
+        	}        	
         }
     });
-/*	
-	$.getJSON("http://14.63.226.13/server/org_list.jsp?type="+type, "callback=?", function(json) {
-		var list_html = "";
-		var detail_html = "";
-
-		resultList = json.resultList;
-
-		totcnt = json.resultList.length;
-		
-		if(totcnt ==0){
-			$('#typ_list').html("<p align=\"center\">목록을 가져오지 못했습니다.</p>");
-		}
-		else{
-			var grpValue = "";
-			var idxChk =0;
-			for (var i = 0; i < totcnt; i++) {
-				
-				var result = resultList[i];
-				if(grpValue == "" || grpValue != result.grp_value ){
-					if(idxChk==0){
-						list_html += "<li data-role=\"list-divider\"  role=\"heading\" class=\"ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined\" >"+result.grp_value+"</li>";
-					}
-					else{
-						list_html += "<li data-role=\"list-divider\"  role=\"heading\" class=\"ui-li ui-li-divider ui-btn ui-bar-b ui-btn-up-undefined\" >"+result.grp_value+"</li>";
-					}
-					idxChk++;
-				}
-				list_html += "<li class=\"ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d\">" +
-							 "<div class=\"ui-btn-inner ui-li\"><div class=\"ui-btn-text\">" +
-				             "<a href=\"javascript\:getTypeDetail('" + i + "')\"  class=\"ui-link-inherit\">"+ result.org_nm +"</a>" +
-				             "</div><span class=\"ui-icon ui-icon-arrow-r ui-icon-shadow\"></span></div></li>"
-				             ;
-			}
-			list_html = "<ul data-role=\"listview\" data-inset=\"true\" class=\"ui-listview ui-listview-inset ui-corner-all ui-shadow\" >" +
-						list_html +
-						"</ul>";
-			$('#typ_list').html(list_html);
-		}
-		
-	});
-*/
-
 }
 
-function getTypeDetail(idx){
+function getTypeDetail(idx,type){
 //	alert(resultList[idx].org_nm);
+
+	switch(type){
+	case "LOC": 
+		$('#dvOrgNm').html("<h3>"+resultListLoc[idx].org_nm+"</h3>");
+		$('#fOrgAddr').attr('value', resultListLoc[idx].org_addr);
+		$('#fOrgTel').attr('value', resultListLoc[idx].org_tel);
+		$('#fOrgUrl').attr('href', resultListLoc[idx].org_url);
+		$('#dvOrgUrlIn').html(resultListLoc[idx].org_url);
+		$('#fOrgCapa').attr('value', resultListLoc[idx].org_capa);
+		$('#fOrgDetail').attr('value', resultListLoc[idx].org_detail);
+		$('#fOrgDesc').attr('value', resultListLoc[idx].org_desc);
+		$('#btnOrgCall').attr('href', "tel:"+resultListLoc[idx].org_tel);
+	break;
+	case "PAY": 
+		$('#dvOrgNm').html("<h3>"+resultListPay[idx].org_nm+"</h3>");
+		$('#fOrgAddr').attr('value', resultListPay[idx].org_addr);
+		$('#fOrgTel').attr('value', resultListPay[idx].org_tel);
+		$('#fOrgUrl').attr('href', resultListPay[idx].org_url);
+		$('#dvOrgUrlIn').html(resultListPay[idx].org_url);
+		$('#fOrgCapa').attr('value', resultListPay[idx].org_capa);
+		$('#fOrgDetail').attr('value', resultListPay[idx].org_detail);
+		$('#fOrgDesc').attr('value', resultListPay[idx].org_desc);
+		$('#btnOrgCall').attr('href', "tel:"+resultListPay[idx].org_tel);
+	break;
+	case "TYP": 
+		$('#dvOrgNm').html("<h3>"+resultListTyp[idx].org_nm+"</h3>");
+		$('#fOrgAddr').attr('value', resultListTyp[idx].org_addr);
+		$('#fOrgTel').attr('value', resultListTyp[idx].org_tel);
+		$('#fOrgUrl').attr('href', resultListTyp[idx].org_url);
+		$('#dvOrgUrlIn').html(resultListTyp[idx].org_url);
+		$('#fOrgCapa').attr('value', resultListTyp[idx].org_capa);
+		$('#fOrgDetail').attr('value', resultListTyp[idx].org_detail);
+		$('#fOrgDesc').attr('value', resultListTyp[idx].org_desc);
+		$('#btnOrgCall').attr('href', "tel:"+resultListTyp[idx].org_tel);
+	break;
+	case "LANG": 
+		$('#dvOrgNm').html("<h3>"+resultListLang[idx].org_nm+"</h3>");
+		$('#fOrgAddr').attr('value', resultListLang[idx].org_addr);
+		$('#fOrgTel').attr('value', resultListLang[idx].org_tel);
+		$('#fOrgUrl').attr('href', resultListLang[idx].org_url);
+		$('#dvOrgUrlIn').html(resultListLang[idx].org_url);
+		$('#fOrgCapa').attr('value', resultListLang[idx].org_capa);
+		$('#fOrgDetail').attr('value', resultListLang[idx].org_detail);
+		$('#fOrgDesc').attr('value', resultListLang[idx].org_desc);
+		$('#btnOrgCall').attr('href', "tel:"+resultListLang[idx].org_tel);
+	break;
 	
-	$('#dvOrgNm').html("<h3>"+resultList[idx].org_nm+"</h3>");
-	$('#fOrgAddr').attr('value', resultList[idx].org_addr);
-	$('#fOrgTel').attr('value', resultList[idx].org_tel);
-	$('#fOrgUrl').attr('href', resultList[idx].org_url);
-	$('#dvOrgUrlIn').html(resultList[idx].org_url);
-	$('#fOrgCapa').attr('value', resultList[idx].org_capa);
-	$('#fOrgDetail').attr('value', resultList[idx].org_detail);
-	$('#fOrgDesc').attr('value', resultList[idx].org_desc);
-	$('#btnOrgCall').attr('href', "tel:"+resultList[idx].org_tel);
+	}	
 	
 	$.mobile.changePage("#org_detail","slide",true,true) ;
 }
