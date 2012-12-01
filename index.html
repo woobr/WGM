@@ -12,7 +12,6 @@
 	<script src="./framework/jquery-1.6.4.js"></script>
 	<script src="./framework/jquery.mobile-1.0.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	
 	<script type="text/javascript"  src="./js/lofunc.js"></script>
 	
 </head>
@@ -46,8 +45,25 @@
 		</div>
 		
 		<div data-role="content" >
-		
-		
+			
+			<label for="notiYn"  >알림여부</label>
+			<select id="notiYn" onchange="setChangeMapInfo();" name="notiYn"  data-role="slider">
+				<option value="off" >알림안함</option>
+				<option value="on" >알림</option>
+			</select>
+
+			<label for="tbLocStatus"  >설정위치</label>
+			<table width="100%" id="tbLocStatus" name="tbLocStatus" >
+				<tr>
+					<td>
+					  	<input type="text" id="posSetTxt" name="posSetTxt"   readonly>
+						<input type="hidden"  id="posSet" name="posSet"   >
+					</td>
+					<td><a id="btnSetPos" href="#" data-role="button"   >저장</a></td>
+				</tr>
+			</table>
+			
+			<div id='map_canvas'  style="width:100%; height:200px"></div>
 		</div>
 		
 		<div data-role="footer" data-position="fixed">

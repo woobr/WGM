@@ -8,14 +8,32 @@ var resultListTyp;
 var totcntLang;
 var resultListLang;
 
+var myOptions; //지도생성옵션
+var map;  //지도객체
+
 //----------------------------------------------------------------------
 //이벤트 처리
 //----------------------------------------------------------------------
 $(function(){
+	//기본처리
+/*
+	if (navigator.geolocation) {
+		  navigator.geolocation.getCurrentPosition(mapLoadSuccess);
+	} else {
+	  //error('not supported');
+	}	
+*/	
+	//메인화면 버튼 이벤트---------------------------------------------------------
 	
-	//메인화면 버튼 이벤트
 	$ ("#btnNoti").bind( "tap" , function(event){
-		$.mobile.changePage("#noti" ) ;
+		if(setMapInfo() && navigator.geolocation){
+			$.mobile.changePage("#noti" ) ;
+		}
+		else{
+			alert("해당 기기에서 위치알림에 필요한 기능을 제공하지 않습니다.");
+			$.mobile.changePage("#main" ) ;
+		}
+		
 	});		
 	$ ("#btnOrg").bind( "tap" , function(event){
 		getTypeList("LOC");	
@@ -25,7 +43,17 @@ $(function(){
 		$.mobile.changePage("#main" ) ;
 	});	
 
-	//기관목록 버튼 이벤트
+	//알림화면 버튼 이벤트---------------------------------------------------------
+	
+	$ ("#btnSetPos").bind( "tap" , function(event){  //위치설정 저장
+			alert("ss");	
+		window.localStorage.setItem('posSetTxt', $('#posSetTxt').attr('value') );
+		window.localStorage.setItem('posSet', $('#posSet').attr('value') );
+	});
+	
+	
+	//기관목록 버튼 이벤트---------------------------------------------------------
+	
 	$ ("#liLoc").bind( "tap" , function(event){
 		getTypeList("LOC");	
 	});	
@@ -39,12 +67,69 @@ $(function(){
 		getTypeList("LANG");
 	});
 	
-	//홈버튼 이벤트
+	//홈버튼 이벤트---------------------------------------------------------
+	
 	$ ("#aHomeOrgDetail").bind( "tap" , function(event){
 		goMain();
 	});		
 	
 });
+
+//----------------------------------------------------------------------
+//맵 위치정보 세팅
+//----------------------------------------------------------------------
+function setMapInfo(){
+
+	 try {
+         if(window.localStorage){
+        	 
+        	$('#notiYn').attr('value', (window.localStorage.getItem('notiYn') ==null )? "off": window.localStorage.getItem('notiYn') );
+        	$('#posSet').attr('value', (window.localStorage.getItem('posSet') ==null )? "": window.localStorage.getItem('posSet') );
+        	$('#posSetTxt').attr('value', (window.localStorage.getItem('posSetTxt') ==null )? "": window.localStorage.getItem('posSetTxt') );
+        	
+        	 return true;
+         }
+         
+     } catch(e){
+         return false; // quit because dom.storage.enabled is false
+     }
+	
+	
+}
+
+//----------------------------------------------------------------------
+//맵 세팅 성공시
+//----------------------------------------------------------------------
+function mapLoadSuccess(position) {  
+/*
+	 var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+	  var myOptions = {
+	    zoom: 15,
+	    center: latlng,
+	    mapTypeControl: false,
+	    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	  };
+	  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	  
+	  var marker = new google.maps.Marker({
+		  //document.getElementById('pos-a').value=position;
+		  //document.getElementById('pos-b').value=map;
+	      position: latlng, 
+	      map: map
+	  });
+*/
+} 
+
+//----------------------------------------------------------------------
+//맵 위치정보 세팅 (변경시)
+//----------------------------------------------------------------------
+function setChangeMapInfo(){
+	
+//alert("setChangeMapInfo");	
+	window.localStorage.setItem("notiYn", $('#notiYn').attr('value') );
+}
 
 //----------------------------------------------------------------------
 //화면 이동 (메인화면)
