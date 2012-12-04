@@ -11,22 +11,50 @@ var resultListLang;
 var myOptions; //지도생성옵션
 var map;  //지도객체
 
+
+
+
+
+var score=0;
+var question=[
+              '1. 며칠 전에 나누었던 대화 내용을 기억하는 것은 어떻습니까?',
+              '2. 최근에 했던 약속을 기억하는 것은 어떻습니까?',
+              '3. 최근에 주변에서 일어났던 일을 기억하는 것은 어떻습니까?',
+              '4. 가스불이나 전깃불을 켜놓고 끄는 것을 잊어버리는 것은 어떻습니까?',
+              '5. 새로 마련한 가전제품이나 기구의 사용법을 익히는 능력은 어떻습니까? ',
+              '6. 자신의 개인위생을 관리하거나(세수, 목욕 등) 외모를 가꾸는 정도는 어떻습니까?',
+              '7. 중요한 제삿날이나 기념일(배우자의 생일, 결혼기념일, 종교행사일 등)을 기억하는 것은 어떻습니까>',
+              '8. 거스름돈을 계산하거나, 돈을 정확히 세서 지불하는 것은 어떻습니까?',
+              '9. 이야기 도중에 머뭇거리거나 말문이 막히는 것은 어떻습니까?',
+              '10 이야기 도중에 물건의 이름을 정확히 대는 정도는 어떻습니까?',
+              '11. 가까운 사람(자식, 손자, 친한친구 등)의 이름을 기억하는 것은 어떻습니까?',
+              '12. 가까운 사람에 관한 사항, 즉 사는 곳이나 직업등을 기억하는 것은 어떻습니까?',
+              '13. 자신의 주소나 전화번호를 기억하는 것은 어떻습니까?',
+              '14. 전화, 가스레인지, 텔레비젼 등 집안에서 늘 사용하던 가구를 다루는 능력은 어떻습니까?',
+              '15. 어떤 옷을 입고 나갈지, 저녁식사에 무엇을 준비할지 등 일상적인 상황에서 결정을 내리는 능력은 어떻습니까?',
+              ];
+var idxStatus = 0;
+
+var result1=[
+            '일번. 합계가   ',
+            '이번. 합계가  .'
+            ];
+var result2=[
+             ' 점 입니다. ',
+             ' 점 입니다.'
+             ];
+var idx = 0;
+
+
 //----------------------------------------------------------------------
 //이벤트 처리
 //----------------------------------------------------------------------
 $(function(){
-	//기본처리
-/*
-	if (navigator.geolocation) {
-		  navigator.geolocation.getCurrentPosition(mapLoadSuccess);
-	} else {
-	  //error('not supported');
-	}	
-*/	
+	
 	//메인화면 버튼 이벤트---------------------------------------------------------
 	
 	$ ("#btnNoti").bind( "tap" , function(event){
-		if(setMapInfo() && navigator.geolocation){
+		if(setMapInfo() ){
 			$.mobile.changePage("#noti" ) ;
 		}
 		else{
@@ -35,6 +63,9 @@ $(function(){
 		}
 		
 	});		
+	$ ("#btnCheck").bind( "tap" , function(event){
+		$.mobile.changePage("#check" ) ;
+	});		
 	$ ("#btnOrg").bind( "tap" , function(event){
 		getTypeList("LOC");	
 		$.mobile.changePage("#org_list" ) ;
@@ -42,6 +73,63 @@ $(function(){
 	$ ("#aHomeOrgCheck").bind( "tap" , function(event){
 		$.mobile.changePage("#main" ) ;
 	});	
+	
+	//테스트 화면이동
+	$ ("#toTest").bind( "tap" , function(event){
+		idxStatus= 0;
+		score=0;
+		$.mobile.changePage("#checkDetail" ) ;
+		readNext();
+	});	
+	
+
+	//점수 클릭 이벤
+	$("#tapZero").bind("tap", function(event){
+		readNext();
+	});
+	$ ("#tapOne").bind( "tap" , function(event){
+		score = score+1;
+		readNext();
+	});	
+	$ ("#tapTow").bind( "tap" , function(event){
+		score = score+2;
+		readNext();
+	});	
+	$ ("#tapNine").bind( "tap" , function(event){
+		score = score+9;
+		readNext();
+	});
+	
+	
+
+	function showResult1(score){
+		idx=0;
+		var res1 = result1[idx];
+		var res2 = result2[idx];
+		$.mobile.changePage("#resultView" ) ;
+		$('#resultSentence').html("<h3>"+res1+score+res2+"</h3>");	
+	}
+
+	function showResult2(){
+		idx=1;
+		var res1 = result1[idx];
+		var res2 = result2[idx];
+		$.mobile.changePage("#resultView" ) ;
+		$('#resultSentence').html("<h3>"+res1+score+res2+"</h3>");	
+	}
+
+
+	function readNext(){
+		if (idxStatus==5&&score==0){
+			showResult1(score);
+		}
+		if (idxStatus==5&&score>0){
+			showResult2(score);
+		}
+		var ques = question[idxStatus];
+		$('#checkContents').html("<h3>"+ques+"</h3>");
+		idxStatus++;
+	}	
 
 	//알림화면 버튼 이벤트---------------------------------------------------------
 	
@@ -71,9 +159,24 @@ $(function(){
 	
 	$ ("#aHomeOrgDetail").bind( "tap" , function(event){
 		goMain();
-	});		
+	});	
+	
+	$ ("#aHomeCheckDetail").bind( "tap" , function(event){
+		goMain();
+	});	
+	
 	
 });
+
+
+//----------------------------------------------------------------------
+//다음버튼 
+//----------------------------------------------------------------------
+function readNext(){
+	idxStatus++;
+	var ques = question[idxStatus];
+	$('#checkContents').html("<h3>"+ques+"</h3>");
+}
 
 //----------------------------------------------------------------------
 //맵 위치정보 세팅
@@ -81,14 +184,27 @@ $(function(){
 function setMapInfo(){
 
 	 try {
+		 var result = false
+		 
          if(window.localStorage){
         	 
         	$('#notiYn').attr('value', (window.localStorage.getItem('notiYn') ==null )? "off": window.localStorage.getItem('notiYn') );
         	$('#posSet').attr('value', (window.localStorage.getItem('posSet') ==null )? "": window.localStorage.getItem('posSet') );
         	$('#posSetTxt').attr('value', (window.localStorage.getItem('posSetTxt') ==null )? "": window.localStorage.getItem('posSetTxt') );
-        	
-        	 return true;
+        	result = true;
          }
+         else{
+        	 result = false;
+         }
+         
+     	if (result && navigator.geolocation) {
+     		  navigator.geolocation.getCurrentPosition(mapLoadSuccess);
+     		 result = true;
+     	} else {
+     	  //error('not supported');
+     		result = false;
+     	}	
+     	return result;
          
      } catch(e){
          return false; // quit because dom.storage.enabled is false
@@ -101,17 +217,17 @@ function setMapInfo(){
 //맵 세팅 성공시
 //----------------------------------------------------------------------
 function mapLoadSuccess(position) {  
-/*
+
 	 var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-	  var myOptions = {
+	  myOptions = {
 	    zoom: 15,
 	    center: latlng,
 	    mapTypeControl: false,
 	    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
 	    mapTypeId: google.maps.MapTypeId.ROADMAP
 	  };
-	  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 	  
 	  var marker = new google.maps.Marker({
 		  //document.getElementById('pos-a').value=position;
@@ -119,7 +235,7 @@ function mapLoadSuccess(position) {
 	      position: latlng, 
 	      map: map
 	  });
-*/
+
 } 
 
 //----------------------------------------------------------------------
