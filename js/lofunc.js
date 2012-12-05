@@ -75,7 +75,7 @@ $(function(){
 	});	
 	
 	//테스트 화면이동
-	$ ("#toTest").bind( "tap" , function(event){
+	$ ("#btnCheck01").bind( "tap" , function(event){
 		idxStatus= 0;
 		score=0;
 		$.mobile.changePage("#checkDetail" ) ;

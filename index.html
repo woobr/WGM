@@ -5,8 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no"/>
 	
-	<link rel="shortcut icon" href="./img/icon.png">
-	<link rel="apple-touch-icon" href="./img/icon.png">
+	<link rel="shortcut icon"  href="./img/icon.png">
+	<link rel="apple-touch-icon"  href="./img/icon.png">
 	
 	<link href="./framework/jquery.mobile-1.0.css" rel="stylesheet" type="text/css" />
 	<script src="./framework/jquery-1.6.4.js"></script>
@@ -15,21 +15,13 @@
 	<script type="text/javascript"  src="./js/lofunc.js"></script>
 	<!-- 스타일 -->
      <style>
-         #start {
-             background: url('img/start.png') no-repeat;
-			 width: 500px;
-             height: 700px;
-         }
-         .hidden_text {
-         display: none;
-         }
          
-         #btnNoti{
+         #btnNoti,#btnCheck01{
          	margin-top : -4px;
          	margin-bottom : -4px;
          }
          
-         #btnCheck,#btnOrg{
+         #btnCheck,#btnOrg,#imgCheck02{
          	margin-bottom : -4px;
          } 
          
@@ -84,33 +76,35 @@
 	</div>	
 	<!-- 위치알람 end -->
 
-	
 	<!-- 자가진단 start -->
-	<div id="check" data-role="page" class="type-index"  >
-		<div data-role="header"   style="background:url(./img/bg_header.png);">
-		    <a id="aHomeCheck" data-icon="home" data-rel="back" >홈</a><!-- 화면방향때문에 뒤로가기 처리 함. 상세화면은?  -->
+	<div id="check" data-role="page"   >
+		<div data-role="header"   style="background:url(./img/bg_header.jpg);">
+		    <a id="aHomeCheck"  data-icon="home"  data-rel="back"  >홈</a>
 			<h1>자가진단</h1>	
 		</div>
-		<div data-role="content"  id="start" >
+		<img id="imgCheck01" src="./img/img_check_01.jpg"    width="100%"  title="치매선별검사안내">
+		<img id="btnCheck01" src="./img/btn_check_01.jpg"    width="100%"  title="검사시작">
+		<img id="imgCheck02" src="./img/img_check_02.jpg"    width="100%"  title="출처:한국치매협회">
+		
+		<!-- div data-role="content"  id="start" >
 
-			<!-- div id="start" align="center" >
+			<! div id="start" align="center" >
 				
-			</div -->
+			</div>
 
-		</div>
+		</div -->
 
 		<!-- 푸터-->
-		<div data-role="footer" data-position="fixed">
+		<!--  div data-role="footer" data-position="fixed">
 			<div align="center">
 				<a id="toTest" href=# data-role="button" >시작하기</a>	
 			</div>
-		</div>	
+		</div-->	
 		
 	</div>
 	<!-- 자가진단 end -->
 
 	<!-- 문제화면 start-->	
-
 	<div id="checkDetail" data-role="page"  >	
 		<!-- 헤더-->
 		<div data-role="header"   style="background:url(./img/bg_header.png);" >
