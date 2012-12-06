@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<script type="text/javascript"  src="./js/lofunc.js"></script>
 	<!-- 스타일 -->
-     <style>
+    <style>
          
          #btnNoti,#btnCheck01{
          	margin-top : -4px;
@@ -25,7 +25,38 @@
          	margin-bottom : -4px;
          } 
          
-     </style>	
+         #checkContents{
+         	position: absolute;
+         	top: 30%;
+         	left: 20%;
+         	width: 70%;
+         }
+         
+         #btnZero{
+         	position: absolute;
+         	top: 61%;
+         	left: 7%;
+         	width: 20%;
+         }
+         #btnOne{
+         	position: absolute;
+         	top: 61%;
+         	left: 27%;
+         	width: 20%;
+         }
+         #btnTwo{
+         	position: absolute;
+         	top: 61%;
+         	left: 47%;
+         	width: 20%;
+         }
+         #btnNine{
+         	position: absolute;
+         	top: 61%;
+         	left: 67%;
+         	width: 20%;
+         }
+    </style>	
 	
 </head>
 <body>
@@ -107,22 +138,27 @@
 	<!-- 문제화면 start-->	
 	<div id="checkDetail" data-role="page"  >	
 		<!-- 헤더-->
-		<div data-role="header"   style="background:url(./img/bg_header.png);" >
-		    <a id="aHomeCheckDetail" data-icon="home">홈</a><!-- 화면방향때문에 뒤로가기 처리 함. 상세화면은?  -->
+		<div data-role="header"   style="background:url(./img/bg_header.jpg);" >
+		    <a id="aHomeCheckQuestion" data-icon="home">홈</a><!-- 화면방향때문에 뒤로가기 처리 함. 상세화면은?  -->
 		    <a href="#" data-icon="back" data-rel="back"  >이전</a>
 			<h1>위치알람</h1>	
 		</div>
 		
+		<img src="./img/img_check_q_01.jpg"  width="100%" title="해당되는 숫자에 체크해주세요">
+		<img id="btnZero" src="./img/btn_check_q_zero.jpg"  title="0">
+		<img id="btnOne" src="./img/btn_check_q_one.jpg"  title="1">
+		<img id="btnTwo" src="./img/btn_check_q_two.jpg"  title="2">
+		<img id="btnNine" src="./img/btn_check_q_nine.jpg"  title="9" >
 		<!-- 내용-->
 		<div data-role="content" >
-			<div id="checkContents">
-			해당되는 숫에 체크 해주세요~!
-			*6개 문항을 9로 체크하면 결과가 나오지 않습니다.
-			</div>
+			<div id="checkContents" >
+				해당되는 숫에 체크 해주세요~!
+				*6개 문항을 9로 체크하면 결과가 나오지 않습니다.
+			</div>		
 		</div>
 		
 		<!-- 푸터-->
-		<div data-role="footer" data-position="fixed">
+		<!--div data-role="footer" data-position="fixed">
 			<div data-role="navbar">
 				<ul>
 					<li><a id=tapZero href='#'>0</a></li>
@@ -131,7 +167,7 @@
 					<li><a id=tapNine href='#'>9</a></li>
 				</ul>
 			</div>
-		</div>
+		</div-->
 	</div>	
 	<!-- 문제화면 end -->		
 
@@ -140,10 +176,9 @@
 	<div id="resultView" data-role="page"  >
 	
 		<!-- 헤더-->
-		<div data-role="header"  data-position="fixed"  style="background:url(./img/bg_header.png);" >   
-			<a id="aHomeCheckDetail" data-icon="home" >홈</a>
-     		<a href="#" data-icon="back" data-rel="back"  >이전</a>
-			<h1>테스트 결과 </h1>
+		<div data-role="header"  data-position="fixed"  style="background:url(./img/bg_header.jpg);" >   
+			<a id="aHomeCheckResult" data-icon="home" >홈</a>
+			<h1>자가진단 결과 </h1>
 	 	</div>
 	 	<!-- 내용-->
 		<div data-role="content" >
@@ -163,34 +198,50 @@
 	<!-- 기관정보목록 페이지 start -->
 	<div id="org_list" data-role="page"  >	
 
-		<div data-role="header"  style="background:url(./img/bg_header.png);" >
+		<div data-role="header"  style="background:url(./img/bg_header.jpg);" >
 		    <a id="aHomeOrgList" data-icon="home" data-rel="back" >홈</a><!-- 화면방향때문에 뒤로가기 처리 함. 상세화면은?  -->
 			<h1>기관정보</h1>	
 		</div>
-
-		<div data-role="content" >
-			<div data-role="navbar" >
-				<ul>
-					<li><a id="liLoc"  class="ui-btn-active ui-corner-left">지역</a></li>
-					<li><a id="liPay" >비용</a></li>
-					<li><a id="liTyp" >시설</a></li>
-					<li><a id="liLang"  class="ui-corner-right">가나다</a></li>
-				</ul>
-			</div>
-			
-			<div id="typ_list"></div>				
-		</div>
 		
-		<div data-role="footer" data-position="fixed">
+		<table width="100%" border=1>
+			<tr>
+				<td colspan=3>상단bg</td>
+			</tr>
+			<tr>
+				<td width="4%">11</td>
+				<td width="92%" height="70%">					
+					<div data-role="navbar" >
+						<ul>
+							<li><a id="liLoc"  class="ui-btn-active ui-corner-left">지역</a></li>
+							<li><a id="liPay" >비용</a></li>
+							<li><a id="liTyp" >시설</a></li>
+							<li><a id="liLang"  class="ui-corner-right">가나다</a></li>
+						</ul>
+					</div>	
+					<br>					
+					<div id="typ_list"></div>				
+				</td>
+				<td width="4%">22</td>
+			</tr>
+			<tr>
+				<td colspan=3>하단bg</td>
+			</tr>
+		</table>
+
+		<!--div data-role="content" >
+			
+		</div-->
+		
+		<!--div data-role="footer" data-position="fixed">
 			<!-- h2>Copyright(c)2012 Mozips.</h2 -->
-		</div>
+		</div-->
 	</div>	
 	<!-- 기관정보목록 페이지 end -->	
 
 	<!-- 기관정보상세 페이지 start -->
 	<div id="org_detail" data-role="page" >	
 		<!-- 헤더-->
-		<div data-role="header"   style="background:url(./img/bg_header.png);" >
+		<div data-role="header"   style="background:url(./img/bg_header.jpg);" >
 		    <a id="aHomeOrgDetail" data-icon="home" >홈</a>
             <a href="#" data-icon="back" data-rel="back"  >이전</a>
 			<h1>기관상세정보</h1>	

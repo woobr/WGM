@@ -1,4 +1,10 @@
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+// 변수선언
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
 
+//기관정보 관련 
 var totcntLoc;    
 var resultListLoc;
 var totcntPay;
@@ -8,13 +14,12 @@ var resultListTyp;
 var totcntLang;
 var resultListLang;
 
+//위치알람 관련 
 var myOptions; //지도생성옵션
 var map;  //지도객체
 
-
-
-
-
+//자가진단 관련 
+var ninecount=0;
 var score=0;
 var question=[
               '1. 며칠 전에 나누었던 대화 내용을 기억하는 것은 어떻습니까?',
@@ -45,15 +50,18 @@ var result2=[
              ];
 var idx = 0;
 
-
 //----------------------------------------------------------------------
-//이벤트 처리
+//----------------------------------------------------------------------
+// 이벤트 처리
+//----------------------------------------------------------------------
 //----------------------------------------------------------------------
 $(function(){
-	
-	//메인화면 버튼 이벤트---------------------------------------------------------
-	
+
+	//-------------------------------------------------------------------
+	//메인화면 버튼 (위치알람)---------------------------------------
 	$ ("#btnNoti").bind( "tap" , function(event){
+		alert("알람기능은 곧 제공 예정입니다.");
+		return;
 		if(setMapInfo() ){
 			$.mobile.changePage("#noti" ) ;
 		}
@@ -62,121 +70,146 @@ $(function(){
 			$.mobile.changePage("#main" ) ;
 		}
 		
-	});		
+	});	
+	//메인화면 버튼 (자가진단)---------------------------------------
 	$ ("#btnCheck").bind( "tap" , function(event){
 		$.mobile.changePage("#check" ) ;
 	});		
+	//메인화면 버튼 (기관)-------------------------------------------
 	$ ("#btnOrg").bind( "tap" , function(event){
 		getTypeList("LOC");	
 		$.mobile.changePage("#org_list" ) ;
 	});	
-	$ ("#aHomeOrgCheck").bind( "tap" , function(event){
-		$.mobile.changePage("#main" ) ;
-	});	
-	
-	//테스트 화면이동
-	$ ("#btnCheck01").bind( "tap" , function(event){
-		idxStatus= 0;
-		score=0;
-		$.mobile.changePage("#checkDetail" ) ;
-		readNext();
-	});	
-	
 
-	//점수 클릭 이벤
-	$("#tapZero").bind("tap", function(event){
-		readNext();
-	});
-	$ ("#tapOne").bind( "tap" , function(event){
-		score = score+1;
-		readNext();
-	});	
-	$ ("#tapTow").bind( "tap" , function(event){
-		score = score+2;
-		readNext();
-	});	
-	$ ("#tapNine").bind( "tap" , function(event){
-		score = score+9;
-		readNext();
-	});
-	
-	
-
-	function showResult1(score){
-		idx=0;
-		var res1 = result1[idx];
-		var res2 = result2[idx];
-		$.mobile.changePage("#resultView" ) ;
-		$('#resultSentence').html("<h3>"+res1+score+res2+"</h3>");	
-	}
-
-	function showResult2(){
-		idx=1;
-		var res1 = result1[idx];
-		var res2 = result2[idx];
-		$.mobile.changePage("#resultView" ) ;
-		$('#resultSentence').html("<h3>"+res1+score+res2+"</h3>");	
-	}
-
-
-	function readNext(){
-		if (idxStatus==5&&score==0){
-			showResult1(score);
-		}
-		if (idxStatus==5&&score>0){
-			showResult2(score);
-		}
-		var ques = question[idxStatus];
-		$('#checkContents').html("<h3>"+ques+"</h3>");
-		idxStatus++;
-	}	
-
-	//알림화면 버튼 이벤트---------------------------------------------------------
-	
+	//-------------------------------------------------------------------
+	//알림화면 버튼 ---------------------------------------------------------
 	$ ("#btnSetPos").bind( "tap" , function(event){  //위치설정 저장
 			alert("ss");	
 		window.localStorage.setItem('posSetTxt', $('#posSetTxt').attr('value') );
 		window.localStorage.setItem('posSet', $('#posSet').attr('value') );
 	});
+
+	//-------------------------------------------------------------------
+	//자가진단시작화면 버튼 (검사시작)------------------------------------
+	$ ("#btnCheck01").bind( "tap" , function(event){
+		goCheckStart();
+	});	
+	//자가진단문제화면 버튼 (검사문제 번호0)-------------------------------
+	$("#btnZero").bind("tap", function(event){
+		readNext();
+	});
+	//자가진단문제화면 버튼 (검사문제 번호1)-------------------------------
+	$ ("#btnOne").bind( "tap" , function(event){
+		score = score+1;
+		readNext();
+	});	
+	//자가진단문제화면 버튼 (검사문제 번호2)-------------------------------
+	$ ("#btnTwo").bind( "tap" , function(event){
+		score = score+2;
+		readNext();
+	});	
+	//자가진단문제화면 버튼 (검사문제 번호9)-------------------------------
+	$ ("#btnNine").bind( "tap" , function(event){
+		if(ninecount ==5){
+			alert("9로 체크한 문항이 5개를 초과하면 결과를 계산하지 못합니다.");
+			return;
+		}
+		ninecount = ninecount+1;
+		readNext();
+	});
+	//자가진단결과화면 버튼 (다시검사하기)-------------------------------
+	$ ("#btnCheckRetry").bind( "tap" , function(event){
+		goCheckStart();
+	});
 	
-	
-	//기관목록 버튼 이벤트---------------------------------------------------------
-	
+	//-------------------------------------------------------------------
+	//기관목록 화면 버튼 (지역)---------------------------------------------
 	$ ("#liLoc").bind( "tap" , function(event){
 		getTypeList("LOC");	
 	});	
+	//기관목록 화면 버튼 (비용)---------------------------------------------
 	$ ("#liPay").bind( "tap" , function(event){
 		getTypeList("PAY");
 	});	
+	//기관목록 화면 버튼 (구분)---------------------------------------------
 	$ ("#liTyp").bind( "tap" , function(event){
 		getTypeList("TYP");
 	});	
+	//기관목록 화면 버튼 (가나다)---------------------------------------------
 	$ ("#liLang").bind( "tap" , function(event){
 		getTypeList("LANG");
-	});
+	});	
 	
-	//홈버튼 이벤트---------------------------------------------------------
-	
+	//홈버튼 이동 이벤트---------------------------------------------------------
 	$ ("#aHomeOrgDetail").bind( "tap" , function(event){
 		goMain();
 	});	
 	
-	$ ("#aHomeCheckDetail").bind( "tap" , function(event){
+	$ ("#aHomeCheckQuestion").bind( "tap" , function(event){
 		goMain();
 	});	
 	
+	$ ("#aHomeCheckResult").bind( "tap" , function(event){
+		goMain();
+	});	
+
 	
 });
 
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+//함수처리
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+
+//자가진단 (검사시작)-------------------------------
+function goCheckStart(){
+	idxStatus=0;
+	score=0;
+	ninecount=0;
+	$.mobile.changePage("#checkDetail" ) ;
+	readNext();	
+}
+
+//자가진단화면 버튼 이벤트 (검사결과)-------------------------------
+function showResult1(score){
+	idx=0;
+	var res1 = result1[idx];
+	var res2 = result2[idx];
+	$.mobile.changePage("#resultView" ) ;
+	$('#resultSentence').html("<h3>"+res1+score+res2+"</h3>");	
+}
+
+function showResult2(){
+	idx=1;
+	var res1 = result1[idx];
+	var res2 = result2[idx];
+	$.mobile.changePage("#resultView" ) ;
+	$('#resultSentence').html("<h3>"+res1+score+res2+"</h3>");	
+}
 
 //----------------------------------------------------------------------
 //다음버튼 
 //----------------------------------------------------------------------
 function readNext(){
+	if (idxStatus==5&&score==0){
+		showResult1(score);
+	}
+	if (idxStatus==5&&score>0){
+		showResult2(score);
+	}
+	var ques = question[idxStatus];
+	$('#checkContents').html("<h3>"+ques+"</h3>");
+	idxStatus++;
+}	
+
+/*
+function readNext(){
 	idxStatus++;
 	var ques = question[idxStatus];
 	$('#checkContents').html("<h3>"+ques+"</h3>");
 }
+*/
 
 //----------------------------------------------------------------------
 //맵 위치정보 세팅
