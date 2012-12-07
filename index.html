@@ -16,46 +16,22 @@
 	<!-- 스타일 -->
     <style>
          
-         #btnNoti,#btnCheck01{
-         	margin-top : -4px;
-         	margin-bottom : -4px;
-         }
+         #btnNoti,#btnCheck01{         	margin-top : -4px;         	margin-bottom : -4px;         }
          
-         #btnCheck,#btnOrg,#imgCheck02{
-         	margin-bottom : -4px;
-         } 
+         #imgCheckQ01{         	margin-top : -29px;         	margin-bottom : -4px;         }
          
-         #checkContents{
-         	position: absolute;
-         	top: 30%;
-         	left: 20%;
-         	width: 70%;
-         }
+         #imgCheckR01{         	margin-top : -4px;         	margin-bottom : -4px;         }
          
-         #btnZero{
-         	position: absolute;
-         	top: 61%;
-         	left: 7%;
-         	width: 20%;
-         }
-         #btnOne{
-         	position: absolute;
-         	top: 61%;
-         	left: 27%;
-         	width: 20%;
-         }
-         #btnTwo{
-         	position: absolute;
-         	top: 61%;
-         	left: 47%;
-         	width: 20%;
-         }
-         #btnNine{
-         	position: absolute;
-         	top: 61%;
-         	left: 67%;
-         	width: 20%;
-         }
+         #btnCheck,#btnOrg,#imgCheck02,#imgCheckR02,#btnCheckR01,#imgCheckR03{         	margin-bottom : -4px;         } 
+         
+         #checkContents{         	position: absolute;         	top: 30%;         	left: 20%;         	width: 70%;         }
+         
+         #btnZero{         	position: absolute;        	top: 65%;         	left: 14%;         	width: 10%;       margin-bottom : -4px;  }
+         #btnOne{         	position: absolute;         	top: 65%;         	left: 35%;         	width: 10%;       margin-bottom : -4px;  }
+         #btnTwo{         	position: absolute;         	top: 65%;         	left: 55%;         	width: 10%;       margin-bottom : -4px;  }
+         #btnNine{         	position: absolute;         	top: 65%;         	left: 77%;         	width: 10%;       margin-bottom : -4px;  }
+         
+         #resultScore{         	position: absolute;         	top: 19%;         	left: 42%;         }
     </style>	
 	
 </head>
@@ -141,21 +117,22 @@
 		<div data-role="header"   style="background:url(./img/bg_header.jpg);" >
 		    <a id="aHomeCheckQuestion" data-icon="home">홈</a><!-- 화면방향때문에 뒤로가기 처리 함. 상세화면은?  -->
 		    <a href="#" data-icon="back" data-rel="back"  >이전</a>
-			<h1>위치알람</h1>	
+			<h1>자가진단</h1>	
 		</div>
-		
-		<img src="./img/img_check_q_01.jpg"  width="100%" title="해당되는 숫자에 체크해주세요">
-		<img id="btnZero" src="./img/btn_check_q_zero.jpg"  title="0">
-		<img id="btnOne" src="./img/btn_check_q_one.jpg"  title="1">
-		<img id="btnTwo" src="./img/btn_check_q_two.jpg"  title="2">
-		<img id="btnNine" src="./img/btn_check_q_nine.jpg"  title="9" >
 		<!-- 내용-->
 		<div data-role="content" >
 			<div id="checkContents" >
 				해당되는 숫에 체크 해주세요~!
 				*6개 문항을 9로 체크하면 결과가 나오지 않습니다.
-			</div>		
+			</div>	
+			
+			<img id="btnZero" src="./img/btn_check_q_zero.jpg"  title="0">
+			<img id="btnOne" src="./img/btn_check_q_one.jpg"  title="1">
+			<img id="btnTwo" src="./img/btn_check_q_two.jpg"  title="2">
+			<img id="btnNine" src="./img/btn_check_q_nine.jpg"  title="9" >	
 		</div>
+		<img id="imgCheckQ01" src="./img/img_check_q_01.jpg"  width="100%" title="해당되는 숫자에 체크해주세요">
+		
 		
 		<!-- 푸터-->
 		<!--div data-role="footer" data-position="fixed">
@@ -173,28 +150,29 @@
 
 	<!-- 결과화면 start -->
 
-	<div id="resultView" data-role="page"  >
+	<div id="checkResult" data-role="page"  >
 	
 		<!-- 헤더-->
 		<div data-role="header"  data-position="fixed"  style="background:url(./img/bg_header.jpg);" >   
 			<a id="aHomeCheckResult" data-icon="home" >홈</a>
-			<h1>자가진단 결과 </h1>
+			<h1>자가진단</h1>
 	 	</div>
+	 	<div id="resultScore"></div>
+		<img id="imgCheckR01" src="./img/img_check_r_01.jpg"    width="100%"  title="치매선별검사결과"> 
+		<img id="imgCheckR02" src="./img/img_check_r_02_1.jpg"    width="100%"  title="결과설명">
+		<img id="btnCheckR01" src="./img/btn_check_r_01.jpg"    width="100%"  title="다시하기">
+		<img id="imgCheckR03" src="./img/img_check_r_03.jpg"    width="100%"  title="출처:한국치매협회">
 	 	<!-- 내용-->
-		<div data-role="content" >
+		<!--div data-role="content" >
 			<p>결과는 </p>
 	 		<div id="resultSentence">
 			</div>
-		</div>
+		</div-->
 		
-		<!-- 푸터-->
-		<div data-role="footer" data-position="fixed"  style="background:url(./img/bg_header.png);" >
-			<a href="#" data-icon="back" data-rel="back"  >다시검사하기</a>
-		</div>	
 	</div>	
 	<!-- 결과화면 end -->
 	
-		
+		http://localhost:8080/WGM/img/img_check_r_02_3.jpg
 	<!-- 기관정보목록 페이지 start -->
 	<div id="org_list" data-role="page"  >	
 

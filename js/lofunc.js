@@ -40,16 +40,6 @@ var question=[
               ];
 var idxStatus = 0;
 
-var result1=[
-            '일번. 합계가   ',
-            '이번. 합계가  .'
-            ];
-var result2=[
-             ' 점 입니다. ',
-             ' 점 입니다.'
-             ];
-var idx = 0;
-
 //----------------------------------------------------------------------
 //----------------------------------------------------------------------
 // 이벤트 처리
@@ -118,7 +108,7 @@ $(function(){
 		readNext();
 	});
 	//자가진단결과화면 버튼 (다시검사하기)-------------------------------
-	$ ("#btnCheckRetry").bind( "tap" , function(event){
+	$ ("#btnCheckR01").bind( "tap" , function(event){
 		goCheckStart();
 	});
 	
@@ -172,44 +162,36 @@ function goCheckStart(){
 }
 
 //자가진단화면 버튼 이벤트 (검사결과)-------------------------------
-function showResult1(score){
-	idx=0;
-	var res1 = result1[idx];
-	var res2 = result2[idx];
-	$.mobile.changePage("#resultView" ) ;
-	$('#resultSentence').html("<h3>"+res1+score+res2+"</h3>");	
-}
-
-function showResult2(){
-	idx=1;
-	var res1 = result1[idx];
-	var res2 = result2[idx];
-	$.mobile.changePage("#resultView" ) ;
-	$('#resultSentence').html("<h3>"+res1+score+res2+"</h3>");	
+function showResult(score){
+	$('#resultScore').html("<h1><font color='#669999'>"+score+"</font></h1>");   
+	
+	if(score <4){
+		$('#imgCheckR02').attr('src', "./img/img_check_r_02_1.jpg");
+	}
+	else if(score>9){
+		$('#imgCheckR02').attr('src', "./img/img_check_r_02_3.jpg");
+	}
+	else{
+		$('#imgCheckR02').attr('src', "./img/img_check_r_02_2.jpg");
+	}
+	$.mobile.changePage("#checkResult" ) ;
+	
 }
 
 //----------------------------------------------------------------------
 //다음버튼 
 //----------------------------------------------------------------------
 function readNext(){
-	if (idxStatus==5&&score==0){
-		showResult1(score);
+	if (idxStatus==7){
+		showResult(score);
+		return;
 	}
-	if (idxStatus==5&&score>0){
-		showResult2(score);
-	}
+	
 	var ques = question[idxStatus];
-	$('#checkContents').html("<h3>"+ques+"</h3>");
+	$('#checkContents').html("<h2><font color='666666'><b>"+ques+"</b></font></h2>");
 	idxStatus++;
 }	
 
-/*
-function readNext(){
-	idxStatus++;
-	var ques = question[idxStatus];
-	$('#checkContents').html("<h3>"+ques+"</h3>");
-}
-*/
 
 //----------------------------------------------------------------------
 //맵 위치정보 세팅
