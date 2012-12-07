@@ -50,8 +50,9 @@ $(function(){
 	//-------------------------------------------------------------------
 	//메인화면 버튼 (위치알람)---------------------------------------
 	$ ("#btnNoti").bind( "tap" , function(event){
-		alert("알람기능은 곧 제공 예정입니다.");
-		return;
+		/*alert("알람기능은 곧 제공 예정입니다.");
+		return;*/
+		tid=setInterval(locationCheck,2000);
 		if(setMapInfo() ){
 			$.mobile.changePage("#noti" ) ;
 		}
@@ -73,10 +74,11 @@ $(function(){
 
 	//-------------------------------------------------------------------
 	//알림화면 버튼 ---------------------------------------------------------
-	$ ("#btnSetPos").bind( "tap" , function(event){  //위치설정 저장
-			alert("ss");	
+	$ ("#btnSetPos").bind( "tap" , function(event){  //위치설정 저장	
 		window.localStorage.setItem('posSetTxt', $('#posSetTxt').attr('value') );
 		window.localStorage.setItem('posSet', $('#posSet').attr('value') );
+		
+		
 	});
 
 	//-------------------------------------------------------------------
@@ -253,6 +255,31 @@ function mapLoadSuccess(position) {
 
 } 
 
+//----------------------------------------------------------------------
+//locationCheck 함수 
+//----------------------------------------------------------------------
+var cnt=0;
+function locationCheck(){
+	
+	var latiSet = 10;
+	var longSet = 0;
+	
+	var latiMove = 10;
+	var longMove = 20;
+	
+	var distance = Math.sqrt( Math.pow(latiSet-latiMove,2) +Math.pow(longSet-longMove,2) );
+	
+	
+	if(cnt<3){
+		cnt++;
+		if(distance<3){
+		alert(cnt+"가까워 ");
+		}else{
+		alert(cnt+"멀어 ");			
+		}
+	}else
+	clearinterval(tid);
+}
 //----------------------------------------------------------------------
 //맵 위치정보 세팅 (변경시)
 //----------------------------------------------------------------------

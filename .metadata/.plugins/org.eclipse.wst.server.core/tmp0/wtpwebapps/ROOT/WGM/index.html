@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>할매 어디가요</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no"/>
+	
+	<link rel="shortcut icon" href="./img/icon.png">
+	<link rel="apple-touch-icon" href="./img/icon.png">
+	
+	<link href="./framework/jquery.mobile-1.0.css" rel="stylesheet" type="text/css" />
+	<script src="./framework/jquery-1.6.4.js"></script>
+	<script src="./framework/jquery.mobile-1.0.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	
+	<script type="text/javascript"  src="./js/lofunc.js"></script>
+	
+</head>
+<body>
+	<!-- 메인 페이지 start -->
+	<div id="main" data-role="page" >
+
+		<div data-role="header"  data-position="fixed" >
+			<h1>할매 어디가요?</h1>
+		</div> 
+
+		<div data-role="content" >
+			<div id="chMain"  align="center"></div>
+			
+			<a id="btnNoti" href="#" data-role="button" >위치알람</a>
+			<a id="btnOrg" href="#" data-role="button" >기관정보</a>
+			<a id="btnTest" href="#" data-role="button" >치매테스트</a>
+		</div>
+		
+		<div data-role="footer" data-position="fixed">
+			<!-- h2>Copyright(c)2012 Mozips.</h2 -->
+		</div>
+	</div>	
+	<!-- 메인 페이지 end -->		
+
+	<!-- 위치알람 start -->
+	<div id="noti" data-role="page" >	
+
+		<div data-role="header" >
+		    <a id="aHomeNoti" data-icon="home" data-rel="back" >홈</a><!-- 화면방향때문에 뒤로가기 처리 함. 상세화면은?  -->
+			<h1>위치알람</h1>	
+		</div>
+		
+		<div data-role="content" >
+		
+		
+		</div>
+		
+		<div data-role="footer" data-position="fixed">
+			<!-- h2>Copyright(c)2012 Mozips.</h2 -->
+		</div>
+	</div>	
+	<!-- 위치알람 end -->
+	
+	
+	<!-- 기관정보목록 페이지 start -->
+	<div id="org_list" data-role="page" >	
+
+		<div data-role="header" >
+		    <a id="aHomeOrgList" data-icon="home" data-rel="back" >홈</a><!-- 화면방향때문에 뒤로가기 처리 함. 상세화면은?  -->
+			<h1>기관정보</h1>	
+		</div>
+
+		<div data-role="content" >
+			<div data-role="navbar">
+				<ul>
+					<li><a id="liLoc"  class="ui-btn-active ui-corner-left">지역</a></li>
+					<li><a id="liPay" >비용</a></li>
+					<li><a id="liTyp" >시설</a></li>
+					<li><a id="liLang"  class="ui-corner-right">가나다</a></li>
+				</ul>
+			</div>
+			
+			<div id="typ_list"></div>				
+		</div>
+		
+		<div data-role="footer" data-position="fixed">
+			<!-- h2>Copyright(c)2012 Mozips.</h2 -->
+		</div>
+	</div>	
+	<!-- 기관정보목록 페이지 end -->	
+
+	<!-- 기관정보상세 페이지 start -->
+	<div id="org_detail" data-role="page" >	
+		<!-- 헤더-->
+		<div data-role="header" >
+		    <a id="aHomeOrgDetail" data-icon="home" >홈</a>
+            <a href="#" data-icon="back" data-rel="back"  >이전</a>
+			<h1>기관상세정보</h1>	
+		</div>  
+		
+		<!-- 내용-->
+		<div data-role="content" >
+			<div id="dvOrgNm"></div>
+			<div id="dvOrgAddr">
+				<label for="fOrgAddr" >주소</label>
+				<textarea id="fOrgAddr" name="fOrgAddr"  readonly> </textarea>
+			</div>				
+			<div id="dvOrgTel">
+				<label for="fOrgTel"  >전화</label>
+				<input type="text" id="fOrgTel" name="fOrgTel" readonly>
+			</div>				
+			<div id="dvOrgUrl">
+				<label for="fOrgUrl"  >홈페이지</label>
+				<a id="fOrgUrl" name="fOrgUrl"  ><div id="dvOrgUrlIn"></div></a>
+			</div>				
+			<div id="dvOrgCapa">
+				<label for="fOrgCapa"  >정원</label>
+				<input type="text" id="fOrgCapa" name="fOrgCapa" readonly>
+			</div>				
+			<div id="dvOrgDetail">
+				<label for="fOrgDetail"  >시설</label>
+				<textarea id="fOrgDetail" name="fOrgDetail"  readonly> </textarea>
+			</div>				
+			<div id="dvOrgDesc">
+				<label for="fOrgDesc"  >기타</label>
+				<textarea id="fOrgDesc" name="fOrgDesc"  readonly> </textarea>
+			</div>
+		</div>
+			<a id="btnOrgCall" href="#" data-role="button" >통화하기</a>			
+			
+		
+		<!-- 푸터-->
+		<div data-role="footer" data-position="fixed">
+			<!-- h2>Copyright(c)2012 Mozips.</h2 -->
+		</div>
+	</div>	
+	<!-- 기관정보상세 페이지 end -->	
+</body>
+</html>	

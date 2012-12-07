@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.internal.QuickAccess">
+		<item value="800" key="dialogWidth"/>
+		<item value="500" key="dialogHeight"/>
+		<list key="orderedProviders">
+			<item value="org.eclipse.ui.perspectives"/>
+			<item value="org.eclipse.ui.preferences"/>
+			<item value="org.eclipse.ui.actions"/>
+		</list>
+		<list key="textArray">
+			<item value="remote"/>
+			<item value="bro"/>
+			<item value="prefe"/>
+		</list>
+		<list key="orderedElements">
+			<item value="org.eclipse.rse.ui.view.SystemPerspective"/>
+			<item value="org.eclipse.ui.browser.preferencePage"/>
+			<item value="preferences"/>
+		</list>
+		<list key="textEntries">
+			<item value="1"/>
+			<item value="1"/>
+			<item value="1"/>
+		</list>
+	</section>
+	<section name="WorkbenchPreferenceDialogSettings">
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+		<item value="203" key="DIALOG_X_ORIGIN"/>
+	</section>
+	<section name="NewWizardAction">
+	</section>
+</section>

@@ -1,0 +1,6 @@
+INDEX VERSION 1.122+/Users/kimnamdu/Documents/workspace/WGM/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2224456763.index
+1423182451.index
+3880151315.index
+3185181049.index
+1842065175.index
