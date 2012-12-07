@@ -1,0 +1,9 @@
+127.0.0.1 - - [30/Nov/2012:02:35:00 +0900] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [30/Nov/2012:02:35:01 +0900] "GET /WGM/index.html HTTP/1.1" 200 4029
+0:0:0:0:0:0:0:1%0 - - [30/Nov/2012:02:35:01 +0900] "GET /WGM/framework/jquery.mobile-1.0.css HTTP/1.1" 200 82656
+0:0:0:0:0:0:0:1%0 - - [30/Nov/2012:02:35:01 +0900] "GET /WGM/framework/jquery-1.6.4.js HTTP/1.1" 200 238159
+0:0:0:0:0:0:0:1%0 - - [30/Nov/2012:02:35:01 +0900] "GET /WGM/js/lofunc.js HTTP/1.1" 200 7665
+0:0:0:0:0:0:0:1%0 - - [30/Nov/2012:02:35:01 +0900] "GET /WGM/framework/jquery.mobile-1.0.js HTTP/1.1" 200 214829
+0:0:0:0:0:0:0:1%0 - - [30/Nov/2012:02:35:01 +0900] "GET /WGM/img/icon.png HTTP/1.1" 404 983
+0:0:0:0:0:0:0:1%0 - - [30/Nov/2012:02:35:02 +0900] "GET /WGM/framework/images/ajax-loader.png HTTP/1.1" 200 366
+0:0:0:0:0:0:0:1%0 - - [30/Nov/2012:02:35:04 +0900] "GET /WGM/framework/images/icons-18-white.png HTTP/1.1" 200 1958

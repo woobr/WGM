@@ -1,0 +1,5 @@
+INDEX VERSION 1.126
+/Users/kimnamdu/Documents/workspace/WGM/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/4080653748.index
+/ROOT/src
+/Users/kimnamdu/Documents/workspace/WGM/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/3687720500.index
+/ROOT/src
