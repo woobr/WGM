@@ -1,0 +1,4 @@
+<%
+	stmt.close();
+	conn.close();
+%>
