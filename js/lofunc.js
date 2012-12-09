@@ -52,9 +52,9 @@ $(function(){
 	$ ("#btnNoti").bind( "tap" , function(event){
 		/*alert("알람기능은 곧 제공 예정입니다.");
 		return;*/
-		tid=setInterval(locationCheck,2000);
+		//tid=setInterval(locationCheck,2000);
 		if(setMapInfo() ){
-			$.mobile.changePage("#noti" ) ;
+			$.mobile.changePage("noti.html" ) ;
 		}
 		else{
 			alert("해당 기기에서 위치알림에 필요한 기능을 제공하지 않습니다.");
@@ -145,7 +145,25 @@ $(function(){
 		goMain();
 	});	
 
-	
+	//배너클릭 이벤트-------------------------------------------------------------
+	$ ("#imgBannerMain").bind( "tap" , function(event){
+		goEconovation();
+	});	
+	$ ("#imgBannerCheck01").bind( "tap" , function(event){
+		goEconovation();
+	});	
+	$ ("#imgBannerCheck02").bind( "tap" , function(event){
+		goEconovation();
+	});	
+	$ ("#imgBannerCheck03").bind( "tap" , function(event){
+		goEconovation();
+	});	
+	$ ("#imgBannerOrg").bind( "tap" , function(event){
+		goEconovation();
+	});	
+	$ ("#imgBannerOrgDtl").bind( "tap" , function(event){
+		goEconovation();
+	});		
 });
 
 //----------------------------------------------------------------------
@@ -184,7 +202,7 @@ function showResult(score){
 //다음버튼 
 //----------------------------------------------------------------------
 function readNext(){
-	if (idxStatus==7){
+	if (idxStatus==15){
 		showResult(score);
 		return;
 	}
@@ -294,6 +312,13 @@ function setChangeMapInfo(){
 //----------------------------------------------------------------------
 function goMain() {
 	$.mobile.changePage("#main") ;  //, "pop", false,false
+}
+
+//----------------------------------------------------------------------
+//화면 이동 (에코노베이션)
+//----------------------------------------------------------------------
+function goEconovation() {
+	$.mobile.changePage("http://www.econovation.co.kr") ;  //, "pop", false,false
 }
 
 //----------------------------------------------------------------------
