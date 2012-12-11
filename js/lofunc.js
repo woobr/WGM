@@ -50,9 +50,10 @@ $(function(){
 	//-------------------------------------------------------------------
 	//메인화면 버튼 (위치알람)---------------------------------------
 	$ ("#btnNoti").bind( "tap" , function(event){
-		/*alert("알람기능은 곧 제공 예정입니다.");
-		return;*/
+		alert("알람기능은 곧 제공 예정입니다.");
+		return;
 		//tid=setInterval(locationCheck,2000);
+		/*
 		if(setMapInfo() ){
 			$.mobile.changePage("noti.html" ) ;
 		}
@@ -60,6 +61,7 @@ $(function(){
 			alert("해당 기기에서 위치알림에 필요한 기능을 제공하지 않습니다.");
 			$.mobile.changePage("#main" ) ;
 		}
+		*/
 		
 	});	
 	//메인화면 버튼 (자가진단)---------------------------------------
@@ -393,7 +395,7 @@ function getTypeList(type){
         dataType: "jsonp",
         crossDomain: true,
         jsonp: "callback",
-        timeout: 2000,
+        timeout: 3000,
         error: function(jqXHR, textStatus, errorThrown) {   
             //alert('Error Message: '+textStatus);
             //alert('HTTP Error: '+errorThrown);

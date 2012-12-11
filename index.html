@@ -8,21 +8,20 @@
 	<link rel="shortcut icon"  href="./img/icon.png">
 	<link rel="apple-touch-icon"  href="./img/icon.png">
 	
-	<link href="./framework/jquery.mobile-1.0.css" rel="stylesheet" type="text/css" />
-	<script src="./framework/jquery-1.6.4.js"></script>
-	<script src="./framework/jquery.mobile-1.0.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<link href="./framework/jquery.mobile-1.2.0.min.css" rel="stylesheet" type="text/css" />
+	<script src="./framework/jquery-1.8.3.min.js"></script>
+	<script src="./framework/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript"  src="./js/lofunc.js"></script>
 	<!-- 스타일 -->
     <style>
          
-         #btnNoti,#btnCheck01{         	margin-top : -4px;         	margin-bottom : -4px;         }
+         #btnCheck,#btnCheck01{         	margin-top : -4px;         	margin-bottom : -4px;         }
          
          #imgCheckQ01{         	margin-top : -29px;         	margin-bottom : -4px;         }
          
          #imgCheckR01{         	margin-top : -4px;         	margin-bottom : -4px;         }
          
-         #btnCheck,#btnOrg,#imgCheck02,#imgCheckR02,#btnCheckR01,#imgCheckR03,#imgBannerMain,#imgBannerCheck01,#imgBannerCheck02,#imgBannerCheck03,#imgBannerOrg,#imgBannerOrgDtl{         	margin-bottom : -4px;         } 
+         #btnNoti,#btnOrg,#imgCheck02,#imgCheckR02,#btnCheckR01,#imgCheckR03,#imgBannerMain,#imgBannerCheck01,#imgBannerCheck02,#imgBannerCheck03,#imgBannerOrg,#imgBannerOrgDtl{         	margin-bottom : -4px;         } 
          
          #checkContents{         	position: absolute;         	top: 28%;         	left: 20%;         	width: 70%;         }
          
@@ -40,8 +39,8 @@
 	<div id="main" data-role="page"  >
 
 		<img src="./img/title.jpg"  width="100%" title="할매어디가요">
-		<img id="btnNoti"  src="./img/btn_main_alarm_b.jpg"   width="100%"  title="위치알람설정">
 		<img id="btnCheck" src="./img/btn_main_check_b.jpg"    width="100%"  title="자가진단">
+		<img id="btnNoti"  src="./img/btn_main_alarm_b.jpg"   width="100%"  title="위치알람설정">
 		<img id="btnOrg"  src="./img/btn_main_org_b.jpg"    width="100%"  title="치매관련 기관 찾기">
 		<img id="imgBannerMain"  src="./img/img_banner_ori.png"    width="100%"  title="kt에코노베이션스마트스쿨">
 		
@@ -85,7 +84,7 @@
 	<!-- 위치알람 end -->
 
 	<!-- 자가진단 start -->
-	<div id="check" data-role="page"   >
+	<div id="check" data-role="page"  style="background:url(./img/bg_white.jpg);" >
 		<div data-role="header"   style="background:url(./img/bg_header.jpg);">
 		    <a id="aHomeCheck"  data-icon="home"  data-rel="back"  >홈</a>
 			<h1>자가진단</h1>	
@@ -93,7 +92,7 @@
 		<img id="imgCheck01" src="./img/img_check_01.jpg"    width="100%"  title="치매선별검사안내">
 		<img id="btnCheck01" src="./img/btn_check_01.jpg"    width="100%"  title="검사시작">
 		<img id="imgCheck02" src="./img/img_check_02.jpg"    width="100%"  title="출처:한국치매협회">
-		<img id="imgBannerCheck01"  src="./img/img_banner_ori.png"    width="100%"  title="kt에코노베이션스마트스쿨">
+		<img id="imgBannerCheck01"  src="./img/img_banner.png"    width="100%"  title="kt에코노베이션스마트스쿨">
 		
 		<!-- div data-role="content"  id="start" >
 
@@ -114,7 +113,7 @@
 	<!-- 자가진단 end -->
 
 	<!-- 문제화면 start-->	
-	<div id="checkDetail" data-role="page"  >	
+	<div id="checkDetail" data-role="page"  style="background:url(./img/bg_white.jpg);" >	
 		<!-- 헤더-->
 		<div data-role="header"   style="background:url(./img/bg_header.jpg);" >
 		    <a id="aHomeCheckQuestion" data-icon="home">홈</a><!-- 화면방향때문에 뒤로가기 처리 함. 상세화면은?  -->
@@ -134,7 +133,7 @@
 			<img id="btnNine" src="./img/btn_check_q_nine.jpg"  title="9" >	
 		</div>
 		<img id="imgCheckQ01" src="./img/img_check_q_01.jpg"  width="100%" title="해당되는 숫자에 체크해주세요">
-		<img id="imgBannerCheck02"  src="./img/img_banner_ori.png"    width="100%"  title="kt에코노베이션스마트스쿨">
+		<img id="imgBannerCheck02"  src="./img/img_banner.png"    width="100%"  title="kt에코노베이션스마트스쿨">
 		
 		<!-- 푸터-->
 		<!--div data-role="footer" data-position="fixed">
@@ -151,7 +150,7 @@
 	<!-- 문제화면 end -->		
 
 	<!-- 결과화면 start -->
-	<div id="checkResult" data-role="page"  >
+	<div id="checkResult" data-role="page"  style="background:url(./img/bg_white.jpg);"  >
 	
 		<!-- 헤더-->
 		<div data-role="header"  data-position="fixed"  style="background:url(./img/bg_header.jpg);" >   
@@ -163,7 +162,7 @@
 		<img id="imgCheckR02" src="./img/img_check_r_02_1.jpg"    width="100%"  title="결과설명">
 		<img id="btnCheckR01" src="./img/btn_check_r_01.jpg"    width="100%"  title="다시하기">
 		<img id="imgCheckR03" src="./img/img_check_r_03.jpg"    width="100%"  title="출처:한국치매협회">
-		<img id="imgBannerCheck03"  src="./img/img_banner_ori.png"    width="100%"  title="kt에코노베이션스마트스쿨">
+		<img id="imgBannerCheck03"  src="./img/img_banner.png"    width="100%"  title="kt에코노베이션스마트스쿨">
 	 	<!-- 내용-->
 		<!--div data-role="content" >
 			<p>결과는 </p>
