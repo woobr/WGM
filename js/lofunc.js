@@ -342,6 +342,7 @@ function setOrgList(list, count, type){
 			else{
 				list_html += "<li data-role=\"list-divider\"  role=\"heading\" class=\"ui-li ui-li-divider ui-btn ui-bar-b ui-btn-up-undefined\" >"+result.grp_value+"</li>";
 			}
+			grpValue = result.grp_value;
 			idxChk++;
 		}
 		list_html += "<li class=\"ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d\">" +
@@ -395,7 +396,7 @@ function getTypeList(type){
         dataType: "jsonp",
         crossDomain: true,
         jsonp: "callback",
-        timeout: 3000,
+        timeout: 10000,
         error: function(jqXHR, textStatus, errorThrown) {   
             //alert('Error Message: '+textStatus);
             //alert('HTTP Error: '+errorThrown);

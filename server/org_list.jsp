@@ -1,6 +1,15 @@
-<%//@ page contentType="text/html;charset=utf-8" %>
-<%@ page language="java" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="utf-8"%>
 <%@include file="./include_jsp/dbconOpen.jsp" %>
+<%!
+
+private String toJs(String str) {
+
+	   return str.replace("\\", "\\\\")
+			     .replace("\r\n", "\\n")
+			     .replace("\n", "\\n");
+}
+
+%>
 <%
 	String funName = request.getParameter("callback");
 	String type = request.getParameter("type");
@@ -37,15 +46,15 @@
 		i++;
 %>
 	{ 
-		"grp_value": "<%=rs.getString("grp_value") %>", 
-		"org_id": "<%=rs.getString("org_id") %>", 
-		"org_nm": "<%=rs.getString("org_nm") %>", 
-		"org_addr": "<%=rs.getString("org_addr") %>", 
-		"org_tel": "<%=rs.getString("org_tel") %>",
-		"org_url": "<%=rs.getString("org_url") %>", 
-		"org_capa": "<%=rs.getString("org_capa") %>", 
-		"org_detail": "<%=rs.getString("org_detail") %>",
-		"org_desc": "<%=rs.getString("org_desc") %>" 
+		"grp_value": "<%=toJs(rs.getString("grp_value")) %>", 
+		"org_id": "<%=toJs(rs.getString("org_id")) %>", 
+		"org_nm": "<%=toJs(rs.getString("org_nm")) %>", 
+		"org_addr": "<%=toJs(rs.getString("org_addr")) %>", 
+		"org_tel": "<%=toJs(rs.getString("org_tel")) %>",
+		"org_url": "<%=toJs(rs.getString("org_url")) %>", 
+		"org_capa": "<%=toJs(rs.getString("org_capa")) %>", 
+		"org_detail": "<%=toJs(rs.getString("org_detail")) %>",
+		"org_desc": "<%=toJs(rs.getString("org_desc")) %>" 
 	}
 	
 <%	}%>	
